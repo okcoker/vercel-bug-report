@@ -1,8 +1,21 @@
 import Image from "next/image";
+import { CONSTANT_RELATED_TO_COMPONENT } from "./component";
 
+/**
+ * `CONSTANT_RELATED_TO_COMPONENT` is fine for use as a style value.
+ * `CONSTANT_RELATED_TO_COMPONENT` is not fine when using within a template string and outputs: `margin-top:30px;height:calc(100vh - [object Object]px)`
+ *
+ * Removing 'use client' from the component file or exporting the constant from a file without `use client` will work as expected
+ */
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main
+      className="flex min-h-screen flex-col items-center justify-between p-24"
+      style={{
+        marginTop: CONSTANT_RELATED_TO_COMPONENT,
+        height: `calc(100vh - ${CONSTANT_RELATED_TO_COMPONENT}px)`,
+      }}
+    >
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
